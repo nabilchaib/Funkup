@@ -27,13 +27,12 @@ class App extends React.Component {
     this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
   }
+
   addTrack(track) {
     if (this.state.playlistTracks.some(savedTrack => savedTrack.id === track.id)) {
       return; 
     }
-    // create a new array with the new track added to the end of the playlistTracks array
     const updatedPlaylist = [...this.state.playlistTracks, track];
-    // update the state of the playlistTracks property with the new array
     this.setState({ playlistTracks: updatedPlaylist });
   }
   
@@ -49,7 +48,6 @@ class App extends React.Component {
   savePlaylist() {
     const trackURIs = this.state.playlistTracks.map(track => track.uri);
     const playlistName = this.state.playlistName;
-    // Pass trackURIs and playlistName to a method that saves the playlist to the user's account
     Spotify.savePlaylist(playlistName, trackURIs)
       .then(() => {
         this.setState({
@@ -75,11 +73,11 @@ class App extends React.Component {
         <h1>Fun<span className="highlight">nnk</span>up</h1>
         <div className="App">
           <SearchBar 
-          onSearch={this.search}/>
+            onSearch={this.search}/>
           <div className="App-playlist">
             <SearchResults 
-            searchResults={this.state.searchResults}
-            onAdd={this.addTrack}
+              searchResults={this.state.searchResults}
+              onAdd={this.addTrack}
             />
             <Playlist 
               playlistName={this.state.playlistName} 
